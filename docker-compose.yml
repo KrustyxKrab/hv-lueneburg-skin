@@ -8,13 +8,14 @@ services:
     ports:
       - "8000:80"
     environment:
-      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASS}
       WORDPRESS_DB_NAME: ${DB_NAME}
       WORDPRESS_DEBUG: 1
     volumes:
       - ./wp-content:/var/www/html/wp-content
+      - ./wp-config.php:/var/www/html/wp-config.php
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     depends_on:
       - db
