@@ -1,0 +1,229 @@
+/*
+Theme Name: Handball Club
+Theme URI: https://example.com/handball-club
+Author: Your Name
+Author URI: https://example.com
+Description: Multi-team Handball Club theme with CPTs for teams, players, matches, sponsors. Built for live scores, schedules, and team pages.
+Version: 0.2.0
+Requires at least: 6.6
+Tested up to: 6.6
+Requires PHP: 8.1
+Text Domain: handball-club
+Tags: sports, club, handball, custom-post-types, responsive, accessibility-ready
+*/
+
+/* --------------------------------------------------------------------------
+   Fonts
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* --------------------------------------------------------------------------
+   Design Tokens
+   -------------------------------------------------------------------------- */
+:root{
+  /* Brand */
+  --brand-900:#0b1f39; /* deep navy */
+  --brand-700:#13325a;
+  --brand-600:#173f76;
+  --brand-500:#1e4e94;
+
+  /* Accent */
+  --accent-600:#d61f45; /* sport red */
+  --accent-500:#e11d48;
+  --accent-400:#f05261;
+
+  /* Surfaces */
+  --surface-900:#0a0f1f; /* page bg (dark) */
+  --surface-800:#0f172a; /* header/sections */
+  --surface-700:#111827; /* cards */
+  --surface-600:#1f2937; /* borders strong */
+  --surface-500:#243247; /* borders subtle */
+
+  /* Text */
+  --text-100:#f8fafc; /* highest on dark */
+  --text-200:#e5e7eb; /* body */
+  --text-400:#94a3b8; /* muted */
+
+  /* Semantic */
+  --success:#16a34a; 
+  --warning:#f59e0b; 
+  --danger:#ef4444;
+
+  /* Radii & shadows */
+  --radius-lg:16px;
+  --radius-md:12px;
+  --shadow-lg:0 20px 50px rgb(0 0 0 / 40%);
+  --shadow-md:0 10px 25px rgb(0 0 0 / 30%);
+  --shadow-sm:0 4px 10px rgb(0 0 0 / 20%);
+
+  /* Container */
+  --container:1280px;
+}
+
+/* --------------------------------------------------------------------------
+   Base / Reset
+   -------------------------------------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box}
+html{line-height:1.5;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--surface-900);color:var(--text-200);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent-500);outline-offset:2px}
+
+/* Typography */
+h1,h2,h3,h4{font-family:Oswald,Inter,ui-sans-serif;line-height:1.1;margin:0 0 .5rem;color:var(--text-100)}
+h1{font-size:clamp(2rem,4vw,3.25rem);letter-spacing:.02em}
+h2{font-size:clamp(1.5rem,3vw,2.2rem)}
+h3{font-size:clamp(1.25rem,2.3vw,1.6rem)}
+p{margin:.75rem 0;color:var(--text-200)}
+.small{font-size:.9rem}
+.muted{color:var(--text-400)}
+.eyebrow{font-family:Oswald,Inter;letter-spacing:.22em;text-transform:uppercase;font-size:.8rem;color:var(--accent-400)}
+
+/* Layout */
+.container{max-width:var(--container);margin-inline:auto;padding:0 1.25rem}
+.grid{display:grid;gap:1.25rem}
+.grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.grid.cols-4{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:900px){.grid.cols-3,.grid.cols-4{grid-template-columns:repeat(2,1fr)}.grid.cols-2{grid-template-columns:1fr}}
+
+/* --------------------------------------------------------------------------
+   Header / Navigation
+   -------------------------------------------------------------------------- */
+.header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--surface-800),rgba(15,23,42,.9));backdrop-filter:saturate(120%) blur(6px);border-bottom:1px solid var(--surface-600)}
+.nav{display:flex;gap:1.25rem;align-items:center}
+.nav a{padding:1rem 0;opacity:.9;transition:opacity .2s,color .2s}
+.nav a[aria-current="page"],.nav a:hover{color:var(--accent-400);opacity:1}
+.site-title{letter-spacing:.02em}
+.site-tagline{color:var(--text-400)}
+
+/* --------------------------------------------------------------------------
+   Hero / Masthead
+   -------------------------------------------------------------------------- */
+.c-hero,.hero{position:relative;background:radial-gradient(1200px 500px at 20% -20%,rgba(209,67,92,.35),transparent),linear-gradient(180deg,var(--brand-900),#0a1222);color:var(--text-100);padding:4rem 0 3rem}
+.c-hero--compact{padding:2.5rem 0}
+.c-hero h1{font-weight:700;text-transform:uppercase}
+.c-hero p{color:var(--text-200);max-width:58ch}
+.c-hero .actions{margin-top:1rem;display:flex;gap:.75rem;flex-wrap:wrap}
+
+/* --------------------------------------------------------------------------
+   Sections
+   -------------------------------------------------------------------------- */
+.c-section,.section{padding:2.25rem 0}
+.c-section__head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.c-section__title{display:flex;align-items:center;gap:.75rem}
+.c-section__title .eyebrow{margin-top:.25rem}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.c-btn,.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.1rem;border-radius:12px;border:1px solid transparent;background:var(--accent-500);color:#fff;font-weight:600;text-transform:uppercase;letter-spacing:.06em;transition:transform .08s ease, box-shadow .2s ease, background .2s}
+.c-btn:hover,.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.c-btn--ghost{background:transparent;border-color:var(--accent-500);color:var(--text-100)}
+.c-btn--light{background:#fff;color:#111}
+
+/* --------------------------------------------------------------------------
+   Cards
+   -------------------------------------------------------------------------- */
+.c-card,.card{background:var(--surface-700);border:1px solid var(--surface-600);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .12s ease, box-shadow .2s ease}
+.c-card:hover,.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.c-card .card-body,.card .card-body{padding:1rem}
+.c-card--news .meta{display:flex;gap:.5rem;align-items:center;color:var(--text-400);font-size:.9rem}
+
+/* Badges / Pills */
+.badge{display:inline-block;padding:.25rem .55rem;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--surface-600);font-size:.75rem;color:var(--text-200);text-transform:uppercase;letter-spacing:.12em}
+
+/* --------------------------------------------------------------------------
+   Widgets & Tables
+   -------------------------------------------------------------------------- */
+.widget{border:1px solid var(--surface-600);background:var(--surface-800);border-radius:var(--radius-lg);padding:1.1rem;box-shadow:var(--shadow-sm)}
+.widget h3{margin-top:0;font-size:1.05rem}
+
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:.75rem;border-bottom:1px solid var(--surface-600);text-align:left}
+.table thead th{font-family:Oswald,Inter;text-transform:uppercase;letter-spacing:.14em;color:var(--text-100)}
+.table tbody tr:hover{background:rgba(255,255,255,.03)}
+
+/* --------------------------------------------------------------------------
+   Breadcrumbs
+   -------------------------------------------------------------------------- */
+.breadcrumbs{font-size:.92rem;color:var(--text-400);margin-bottom:.75rem}
+.breadcrumbs a{text-decoration:underline}
+
+/* --------------------------------------------------------------------------
+   Scoreboard / Live ticker
+   -------------------------------------------------------------------------- */
+.live-ticker{display:flex;align-items:center;gap:.75rem;border-left:4px solid var(--accent-500);padding:1rem;background:linear-gradient(90deg,rgba(225,29,72,.12),transparent);font-family:Oswald,Inter;font-size:1.2rem;letter-spacing:.06em}
+.score{display:inline-flex;align-items:center;gap:.5rem;padding:.25rem .5rem;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--surface-600)}
+
+/* --------------------------------------------------------------------------
+   Header/Footer refinements
+   -------------------------------------------------------------------------- */
+.site-footer{border-top:1px solid var(--surface-600);background:var(--surface-800);padding:2.25rem 0;color:var(--text-400)}
+.site-footer h4{font-family:Oswald,Inter;text-transform:uppercase;letter-spacing:.14em;color:var(--text-100)}
+.site-footer .sponsors{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.site-footer .sponsors img{height:34px;filter:grayscale(1) contrast(1.2);opacity:.85}
+
+/* --------------------------------------------------------------------------
+   Forms / Selects
+   -------------------------------------------------------------------------- */
+select, input, textarea{background:var(--surface-700);color:var(--text-200);border:1px solid var(--surface-600);border-radius:10px;padding:.55rem .75rem}
+label{color:var(--text-400)}
+
+/* --------------------------------------------------------------------------
+   Component Variants (map existing markup to components)
+   -------------------------------------------------------------------------- */
+/* Hero on homepage */
+.hero h1{font-weight:700;text-transform:uppercase}
+.hero p{max-width:58ch}
+
+/* News grid cards */
+#news-feed .card h3{font-family:Oswald,Inter;text-transform:uppercase;letter-spacing:.04em}
+
+/* Upcoming matches list */
+#hc-live-matches .card strong{font-family:Oswald,Inter}
+
+/* Buttons inside cards */
+.card .btn{margin-top:.5rem}
+
+/* Sponsor strip spacing */
+.sponsors img{opacity:.85}
+
+/* --------------------------------------------------------------------------
+   Utilities
+   -------------------------------------------------------------------------- */
+.center{display:grid;place-items:center}
+.mt-0{margin-top:0}
+.mt-1{margin-top:.25rem}
+.mt-2{margin-top:.5rem}
+.mt-3{margin-top:.75rem}
+.mt-4{margin-top:1rem}
+.mb-0{margin-bottom:0}
+.mb-2{margin-bottom:.5rem}
+.mb-4{margin-bottom:1rem}
+
+/* Responsive helpers */
+@media (max-width:640px){
+  .c-hero,.hero{padding:2.5rem 0}
+  .nav{gap:.75rem}
+}
+
+.news-card,
+.match-card {
+  background: var(--surface-700);
+  border: 1px solid var(--surface-600);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform .12s ease, box-shadow .2s ease;
+}
+.news-card:hover,
+.match-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.news-card .news-title { font-family: Oswald, Inter; text-transform: uppercase; letter-spacing:.04em; }
+.match-card .match-header { display:flex; justify-content:space-between; align-items:center; padding:1rem; }
+.match-card .match-score { font-family: Oswald, Inter; font-size:1.25rem; padding:0 1rem 1rem; }
