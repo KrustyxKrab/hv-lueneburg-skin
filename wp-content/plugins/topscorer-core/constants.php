@@ -1,0 +1,23 @@
+<?php
+
+define( 'TOPSCORER_CORE_VERSION', '1.2' );
+define( 'TOPSCORER_CORE_ABS_PATH', dirname( __FILE__ ) );
+define( 'TOPSCORER_CORE_REL_PATH', dirname( plugin_basename( __FILE__ ) ) );
+define( 'TOPSCORER_CORE_URL_PATH', plugin_dir_url( __FILE__ ) );
+define( 'TOPSCORER_CORE_ASSETS_PATH', TOPSCORER_CORE_ABS_PATH . '/assets' );
+define( 'TOPSCORER_CORE_ASSETS_URL_PATH', TOPSCORER_CORE_URL_PATH . 'assets' );
+define( 'TOPSCORER_CORE_INC_PATH', TOPSCORER_CORE_ABS_PATH . '/inc' );
+define( 'TOPSCORER_CORE_INC_URL_PATH', TOPSCORER_CORE_URL_PATH . 'inc' );
+define( 'TOPSCORER_CORE_CPT_PATH', TOPSCORER_CORE_INC_PATH . '/post-types' );
+define( 'TOPSCORER_CORE_CPT_URL_PATH', TOPSCORER_CORE_INC_URL_PATH . '/post-types' );
+define( 'TOPSCORER_CORE_SHORTCODES_PATH', TOPSCORER_CORE_INC_PATH . '/shortcodes' );
+define( 'TOPSCORER_CORE_SHORTCODES_URL_PATH', TOPSCORER_CORE_INC_URL_PATH . '/shortcodes' );
+define( 'TOPSCORER_CORE_HEADER_LAYOUTS_PATH', TOPSCORER_CORE_INC_PATH . '/header/layouts' );
+define( 'TOPSCORER_CORE_HEADER_LAYOUTS_URL_PATH', TOPSCORER_CORE_INC_URL_PATH . '/header/layouts' );
+define( 'TOPSCORER_CORE_HEADER_ASSETS_PATH', TOPSCORER_CORE_INC_PATH . '/header/assets' );
+define( 'TOPSCORER_CORE_HEADER_ASSETS_URL_PATH', TOPSCORER_CORE_INC_URL_PATH . '/header/assets' );
+
+define( 'TOPSCORER_CORE_MENU_NAME', 'topscorer_core_menu' );
+define( 'TOPSCORER_CORE_OPTIONS_NAME', 'topscorer_core_options' );
+
+define( 'TOPSCORER_CORE_PROFILE_SLUG', 'mikado' );

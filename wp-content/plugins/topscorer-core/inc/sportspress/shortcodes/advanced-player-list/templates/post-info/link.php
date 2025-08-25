@@ -1,0 +1,1 @@
+<a class="qodef-e-permalink" itemprop="url" href="<?php echo get_permalink( $player_id ); ?>" title="<?php the_title_attribute( array( 'post' => $player_id ) ); ?>"></a>

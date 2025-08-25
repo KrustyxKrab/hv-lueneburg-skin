@@ -1,0 +1,1 @@
+<<?php echo topscorer_core_escape_title_tag( $title_tag ); ?> <?php qode_framework_class_attribute( $holder_classes ); ?> <?php qode_framework_inline_style( $holder_styles ); ?>><?php echo wp_kses_post( $title ); ?></<?php echo topscorer_core_escape_title_tag( $title_tag ); ?>>
