@@ -1,0 +1,19 @@
+[package]
+name = "krustyxkrab/hv-lueneburg-skin"
+version = "0.1.0"
+description = "Description for package hv-lueneburg-skin"
+
+# See more keys and definitions at https://docs.wasmer.io/registry/manifest
+
+[[module]]
+name = "hv-lueneburg-skin"
+source = "hv-lueneburg-skin.wasm"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "hv-lueneburg-skin"
+module = "hv-lueneburg-skin"
+runner = "wasi"
