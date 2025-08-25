@@ -5,6 +5,13 @@ description = "Description for package hv-lueneburg-skin"
 
 # See more keys and definitions at https://docs.wasmer.io/registry/manifest
 
+
+[fs]
+# Map the in-app path "/app" to your Git path "hvl-skin/app"
+"/app" = "hvl-skin/app"
+# (optional) provide a php.ini directory
+"/config" = "config"
+
 [[module]]
 name = "hv-lueneburg-skin"
 source = "hv-lueneburg-skin.wasm"
